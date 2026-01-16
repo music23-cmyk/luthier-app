@@ -1,0 +1,81 @@
+<ion-header [translucent]="true"> 
+  <ion-toolbar>
+    <ion-title>orders-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-title>
+      {{ orderId ? 'orders-form-update' : 'orders-form-create' }}
+    </ion-title>
+  </ion-header>
+  
+  <ion-list>
+
+    <!-- Select Cliente -->
+    <ion-item>
+      <ion-label position="fixed" for="clientId">Client</ion-label>
+      <ion-select [(ngModel)]="order.clientId" id="clientId" name="clientId" interface="popover" placeholder="Select Client">
+        <ion-select-option *ngFor="let c of clients" [value]="c.id">
+          {{ c.name }} {{ c.surname }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Instrumento -->
+    <ion-item>
+      <ion-label position="fixed" for="instrument">Musical Instrument</ion-label>
+      <ion-input [(ngModel)]="order.instrument" id="instrument" name="instrument" required></ion-input>
+    </ion-item>
+
+    <!-- Fecha recibida -->
+    <ion-item>
+      <ion-label position="fixed" for="receivedDate">Date Received</ion-label>
+      <ion-datetime
+        [(ngModel)]="order.receivedDate"
+        id="receivedDate"
+        name="receivedDate"
+        display-format="DD/MM/YYYY"
+        picker-format="DD/MM/YYYY"
+        presentation="date">
+      </ion-datetime>
+    </ion-item>
+
+    <!-- Problem description -->
+    <ion-item>
+      <ion-label position="fixed" for="problemDescription">Problem Description</ion-label>
+      <ion-input [(ngModel)]="order.problemDescription" id="problemDescription" name="problemDescription"></ion-input>
+    </ion-item>
+
+    <!-- Status -->
+    <ion-item>
+      <ion-label position="fixed" for="status">Status</ion-label>
+      <ion-select [(ngModel)]="order.status" id="status" name="status" interface="popover" placeholder="Select Status">
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Repairing">Repairing</ion-select-option>
+        <ion-select-option value="Completed">Completed</ion-select-option>
+        <ion-select-option value="Delivered">Delivered</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Foto -->
+    <ion-item lines="none" style="height: 120px;">
+      <ion-label position="fixed">Photo</ion-label>
+      <div (click)="takePhoto()" style="display: flex; align-items: center; cursor: pointer;">
+        <ion-img *ngIf="order.photo" [src]="order.photo" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 8px;"></ion-img>
+        <ion-icon *ngIf="!order.photo" name="camera-outline" style="font-size: 28px;"></ion-icon>
+      </div>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Botón crear/actualizar -->
+  <ion-fab vertical="bottom" slot="fixed">  
+    <ion-fab-button (click)="saveOrder()">
+      <ion-icon name="{{ orderId ? 'save' : 'add' }}"></ion-icon>  
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+

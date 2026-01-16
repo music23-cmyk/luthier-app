@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ clientId ? 'Edit Client' : 'New Client' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <!-- Nombre -->
+    <ion-item>
+      <ion-label position="fixed" for="name">Name</ion-label>
+      <ion-input [(ngModel)]="client.name" id="name" name="name" required></ion-input>
+    </ion-item>
+
+    <!-- Apellido -->
+    <ion-item>
+      <ion-label position="fixed" for="surname">Surname</ion-label>
+      <ion-input [(ngModel)]="client.surname" id="surname" name="surname" required></ion-input>
+    </ion-item>
+
+    <!-- Email -->
+    <ion-item>
+      <ion-label position="fixed" for="email">Email</ion-label>
+      <ion-input [(ngModel)]="client.email" id="email" name="email" type="email" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <!-- FAB Guardar -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveClient()">
+      <ion-icon name="{{ clientId ? 'save' : 'add' }}"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- FAB Delete (solo si estamos editando un cliente) -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="clientId">
+    <ion-fab-button color="danger" (click)="deleteClient()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+

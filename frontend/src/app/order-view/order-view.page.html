@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Order View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="order">
+  <!-- Media Card --> 
+  <ion-card button (click)="editOrder()">
+    <!-- Foto arriba -->
+    <ion-img 
+      [src]="order.photo || 'assets/img/default.png'" 
+      (error)="onImageError($event)"
+      style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 16px;">
+    </ion-img>
+
+    <!-- Datos de la orden -->
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h3>Client Name</h3>
+          <p>{{ order.clientName }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Instrument</h3>
+          <p>{{ order.instrument }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Date Received</h3>
+          <p>{{ formattedDateReceived || 'No especificada' }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Status</h3>
+          <p>{{ order.status }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Problem Description</h3>
+          <p>{{ order.problemDescription }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <!-- Botón DELETE -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="deleteOrder()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

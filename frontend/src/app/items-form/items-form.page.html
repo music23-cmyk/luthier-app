@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ itemId ? 'Edit Item' : 'New Item' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <!-- Name -->
+    <ion-item>
+      <ion-label position="fixed" for="name">Name</ion-label>
+      <ion-input [(ngModel)]="item.name" id="name" name="name" required></ion-input>
+    </ion-item>
+
+    <!-- Description -->
+    <ion-item>
+      <ion-label position="fixed" for="description">Description</ion-label>
+      <ion-input [(ngModel)]="item.description" id="description" name="description" required></ion-input>
+    </ion-item>
+
+    <!-- Quantity -->
+    <ion-item>
+      <ion-label position="fixed" for="quantity">Quantity</ion-label>
+      <ion-input [(ngModel)]="item.quantity" id="quantity" name="quantity" type="number" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <!-- FAB Guardar -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveItem()">
+      <ion-icon name="{{ itemId ? 'save' : 'add' }}"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- FAB Delete (solo si estamos editando un item) -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="itemId">
+    <ion-fab-button color="danger" (click)="deleteItem()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

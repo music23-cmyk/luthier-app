@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="buttons-container">
+    <!-- Inventory Button -->
+    <ion-button class="home-button" routerLink="/items-list">
+      Inventory
+    </ion-button>
+
+    <!-- Orders Button con badge -->
+    <ion-button class="home-button" routerLink="/my-orders" style="position: relative;">
+      Orders
+      <ion-badge 
+        *ngIf="pendingCount > 0" 
+        style="background-color: #D0755C; position: absolute; top: -5px; right: -5px;">
+        {{ pendingCount }}
+      </ion-badge>
+    </ion-button>
+
+    <!-- Clients Button -->
+    <ion-button class="home-button" routerLink="/clients-list">
+      Clients
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,79 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div style="display: flex; flex-direction: column; gap: 8px; width: 200px; margin: 16px auto;">
+      <ion-menu-toggle>
+        <ion-button class="home-button" routerLink="/items-list" style="width: 100%;">
+          Inventory
+        </ion-button>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-button class="home-button" routerLink="/clients-list" style="width: 100%;">
+          Clients
+        </ion-button>
+      </ion-menu-toggle>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>my-orders</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <!-- Refresher que se activa al hacer pull hacia abajo -->
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="refresh-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    
+    <!-- Header que se colapsa al hacer scroll -->
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">my-orders</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <!-- Contenido principal -->
+    <ion-list *ngIf="orders && orders.length > 0;">
+      <ion-item *ngFor="let order of orders" button (click)="goToOrderView(order)">
+        <!-- Imagen a la izquierda con fallback -->
+        <ion-thumbnail slot="start">
+          <img 
+            [src]="order.photo || 'assets/img/instrument-default.jpg'" 
+            alt="{{order.instrument || 'Instrumento'}}"
+            (error)="onImageError($event)">
+        </ion-thumbnail>
+        <!-- Información principal -->
+        <ion-label>
+          <h2>{{ order.clientName || 'Cliente desconocido' }}</h2>
+          <p>{{ order.instrument || 'Sin instrumento especificado' }}</p>
+        </ion-label>
+        <!-- Estado a la derecha con color dinámico -->
+        <ion-note slot="end" [color]="getStatusColor(order.status)">
+          {{ order.status || 'Pendiente' }}
+        </ion-note>
+      </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button routerLink="/orders-form">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+</div>
