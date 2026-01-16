@@ -15,6 +15,8 @@ Permite realizar operaciones CRUD e incluye captura y almacenamiento de imágene
 
 Descargar o clonar el repositorio.
 
+crear la tabla db_luthier en mysql
+
 Abrir el proyecto en Visual Studio Code.
 Backend
  -  cd backend
@@ -39,10 +41,9 @@ Una vez iniciado el backend y el frontend:
   Gestionar clientes e items.
 
 3. Para comprobar el funcionamiento de la API, se pueden ejecutar las peticiones desde Postman.
-Se ha compartido la colección utilizada, debido a que postman no me ha permitido publicar la documentación. En cuanto me permita, la adjunto.
 
-https://musicclarinet23-798406.postman.co/workspace/MusicCla's-Workspace~4a38e772-be7c-4f3e-8a95-6ff3610365a6/collection/50267637-a17f38d9-20c6-436f-89d0-0987b215a196?action=share&creator=50267637 
-<img width="519" height="346" alt="image" src="https://github.com/user-attachments/assets/92d11359-b1e4-4edc-b75e-fc5f27d9ebbb" />
+Link a la documentación
+https://documenter.getpostman.com/view/50267637/2sBXVhEr4V
 
 
 ## Construido con 🛠️
